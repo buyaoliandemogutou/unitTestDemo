@@ -1,6 +1,13 @@
 import unittest
 import HTMLTestReportEN
+import os
+import datetime
 
+
+#获取当前时间
+nowTime=datetime.datetime.now().strftime('%Y-%m-%d')
+proDir=os.path.realpath(__file__)
+print(proDir)
 class MyTest(unittest.TestCase):
     def terDown(self):
         print('每个测试用例执行之后做操作')
@@ -28,7 +35,8 @@ if __name__ == '__main__':
     test_suite=unittest.TestSuite()
     test_suite.addTest(MyTest('test_first_run'))
     test_suite.addTest(MyTest('test_b_run'))
-    fp=open('res.html','wb')
+    reportName='APITestReport '+nowTime+'.html'
+    fp=open(reportName,'wb')
     runner=HTMLTestReportEN.HTMLTestRunner(stream=fp,title='api测试报告',tester='ZhaoJun')
     runner.run(test_suite)
 
